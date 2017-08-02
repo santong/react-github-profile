@@ -56,11 +56,27 @@ class App extends Component {
           <p className="section-title">The Github-Profile-Repo</p>
           <div className="repo-status">
             <div className="status-block">
+              <a className="status-title">Watches</a>
+              <a className="status-content">16</a>
+            </div>
+            <div className="status-block">
+              <a className="status-title">Stars</a>
+              <a className="status-content">424</a>
+            </div>
+            <div className="status-block">
+              <a className="status-title">Forks</a>
+              <a className="status-content">3</a>
+            </div>
+            <div className="status-block">
+              <a className="status-title">Issues</a>
+              <a className="status-content">6</a>
+            </div>
+            <div className="status-block">
               <a className="status-title">Commits</a>
               <a className="status-content">16</a>
             </div>
             <div className="status-block">
-              <a className="status-title">Issues</a>
+              <a className="status-title">Branchs</a>
               <a className="status-content">424</a>
             </div>
             <div className="status-block">
