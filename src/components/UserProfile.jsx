@@ -11,7 +11,10 @@ class UserProfile extends Component {
     render() {
         if (this.props.data.loading) {
             return (
-                <div>Loading...</div>
+                <div className="loading">
+                    <div className="loading-title"/>
+                    <div className="loading-subtitle"/>
+                </div>
             );
         }
         let user = this.props.data.user;

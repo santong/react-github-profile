@@ -5,6 +5,7 @@ import App from './containers/App';
 import registerServiceWorker from './registerServiceWorker';
 
 import { ApolloClient, createNetworkInterface, ApolloProvider } from 'react-apollo';
+import config from './config'
 
 const networkInterface = createNetworkInterface({
     uri: 'https://api.github.com/graphql',
@@ -15,7 +16,7 @@ networkInterface.use([{
         if (!req.options.headers) {
             req.options.headers = {};  // Create the header object if needed.
         }
-        req.options.headers.authorization = 'Bearer fa54685d041b86ecd3c4f2d9d69fd5a0e74e5468';
+        req.options.headers.authorization = `Bearer ${config.token}`;
         next();
     }
 }]);

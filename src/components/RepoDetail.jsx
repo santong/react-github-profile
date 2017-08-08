@@ -7,10 +7,14 @@ import {graphql} from 'react-apollo';
 import query from '../query';
 
 class RepoDetail extends Component {
+
     render() {
         if (this.props.data.loading) {
             return (
-                <div>Loading...</div>
+                <div className="loading">
+                    <div className="loading-title"/>
+                    <div className="loading-subtitle"/>
+                </div>
             );
         }
         return (

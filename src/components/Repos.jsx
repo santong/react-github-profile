@@ -10,11 +10,13 @@ class Repos extends Component {
     render() {
         if (this.props.data.loading) {
             return (
-                <div>Loading...</div>
+                <div className="loading">
+                    <div className="loading-title"/>
+                    <div className="loading-subtitle"/>
+                </div>
             );
         }
         let user = this.props.data.user;
-        console.log('user', user);
         let list = user.pinnedRepositories.nodes.map((item) => {
             return (
                 <div className="repo" onClick={() => this.onClick(item.id)} key={item.id}>
