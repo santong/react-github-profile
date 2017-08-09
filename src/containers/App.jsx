@@ -7,10 +7,6 @@ import query from '../query';
 
 class App extends Component {
 
-    componentDidMount() {
-        console.log(query.login);
-    }
-
     render() {
         return (
             <div className="App">

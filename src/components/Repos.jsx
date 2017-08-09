@@ -5,6 +5,10 @@ import React, {Component} from 'react';
 import '../assets/styles.css';
 import {graphql} from 'react-apollo';
 import query from '../query';
+import {
+    Route,
+    Link
+} from 'react-router-dom'
 
 class Repos extends Component {
     render() {
@@ -19,13 +23,15 @@ class Repos extends Component {
         let user = this.props.data.user;
         let list = user.pinnedRepositories.nodes.map((item) => {
             return (
-                <div className="repo" onClick={() => this.onClick(item.id)} key={item.id}>
-                    <a href={item.url} target="blank">{item.name}</a>
-                    <div>
-                        <a>Stars: {item.stargazers.totalCount}</a>
-                        <a>Forks: {item.forks.totalCount}</a>
+                <Link to={`/repos/${item.name}`} key={item.id}>
+                    <div className="repo" onClick={() => this.onClick(item.id)}>
+                        <a target="blank">{item.name}</a>
+                        <div>
+                            <a>Stars: {item.stargazers.totalCount}</a>
+                            <a>Forks: {item.forks.totalCount}</a>
+                        </div>
                     </div>
-                </div>
+                </Link>
             );
         });
         return (

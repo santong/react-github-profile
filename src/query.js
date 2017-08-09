@@ -48,27 +48,70 @@ export default class {
             }
         }`);
 
-    static repo_detail = gql(`
-        query($name: String!) {
-            repository(owner: "santong", name: $name) {
+    static repo_detail(repo_name) {
+        return gql(`
+        query repoDetail {
+            repository(owner: "santong", name: "${repo_name}") {
                 id
                 name
                 description
                 watchers {
-                    totalCount
+                  totalCount
                 }
                 stargazers {
-                    totalCount
+                  totalCount
                 }
                 forks {
-                    totalCount
+                  totalCount
                 }
                 issues {
-                    totalCount
+                  totalCount
                 }
                 releases {
-                    totalCount
+                  totalCount
                 }
-            }
-        }`);
+                refs(refPrefix: "refs/", first: 10) {
+                  totalCount
+                  nodes {
+                    name
+                    target {
+                      ... on Commit {
+                        id
+                        history(first: 100) {
+                          edges {
+                            node {
+                              messageHeadline
+                              oid
+                              message
+                              author {
+                                name
+                                email
+                                date
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+        }`)
+    };
+    //
+    // static branch_count = gql(`
+    //     query branchCounts($owner: String!, $name: String!) {
+    //       repository(owner: $owner, name: $name) {
+    //         refs(refPrefix: "refs/") {
+    //           totalCount
+    //         }
+    //       }
+    //     }`);
+    //
+    // static commits = gql(`
+    //     query commits($owner: String!, $name: String!, $branchCount: Int!) {
+    //       repository(owner: $owner, name: $name) {
+    //
+    //     }
+    //   }`);
 }
