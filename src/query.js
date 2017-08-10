@@ -48,10 +48,10 @@ export default class {
             }
         }`);
 
-    static repo_detail(repo_name) {
+    static repo_detail() {
         return gql(`
-        query repoDetail {
-            repository(owner: "santong", name: "${repo_name}") {
+        query repoDetail($repo_name: String!) {
+            repository(owner: "santong", name: $repo_name) {
                 id
                 name
                 description
