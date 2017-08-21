@@ -64,15 +64,14 @@ export default class RepoCommits extends Component {
         const ctx = this.refs.canvas.getContext('2d');
         let r = this.props.sliderHeight / r_radio;
         let dur = RepoCommits.calculateDuring(this.props.during, r);
-        let s = RepoCommits.calculateDistance(this.props.commits.length, r, dur);
+        let lineWidth = RepoCommits.calculateDistance(this.props.commits.length, r, dur);
 
-        ctx.beginPath();
 
         let lineColor = this.props.lineColor;
         if (typeof lineColor === 'string') {
             ctx.fillStyle = lineColor;
         } else {
-            let gradient = ctx.createLinearGradient(0, 0, s, 0);
+            let gradient = ctx.createLinearGradient(0, 0, lineWidth, 0);
             gradient.addColorStop(0, lineColor[0]);
             let gdur = 1 / (lineColor.length - 1);
             for (let i = 1; i < lineColor.length - 1; i++) {
@@ -81,8 +80,10 @@ export default class RepoCommits extends Component {
             gradient.addColorStop(1.0, lineColor[lineColor.length - 1]);
             ctx.fillStyle = gradient;
         }
+        ctx.beginPath();
+        ctx.fillRect(0, this.props.sliderHeight / 2, lineWidth, 2);
+        ctx.closePath();
 
-        ctx.fillRect(0, this.props.sliderHeight / 2, s, 2);
         ctx.stroke();
     }
 
@@ -123,14 +124,15 @@ export default class RepoCommits extends Component {
         ctx.beginPath();
         ctx.fillStyle = color;
         ctx.arc(pos, sliderHeight / 2, r, 0, Math.PI * 2, false);
+        ctx.closePath();
         ctx.fill();
-        ctx.stroke();
 
         ctx.beginPath();
         ctx.fillStyle = "#fff";
         ctx.arc(pos, sliderHeight / 2, r * 0.8, 0, Math.PI * 2, true);
         ctx.fill();
-        ctx.stroke();
+        ctx.closePath();
+
 
         if (hintDur) {
             ctx.beginPath();
@@ -139,9 +141,11 @@ export default class RepoCommits extends Component {
             ctx.fillStyle = textColor;
             ctx.strokeStyle = textColor;
             ctx.fillText(commit.des, pos + hintDur, sliderHeight / 2 + hintDur);
+            ctx.closePath();
             ctx.stroke();
             ctx.strokeStyle = "transparent";
         }
+
     }
 
     static calculateDistance(n, r, dur) {

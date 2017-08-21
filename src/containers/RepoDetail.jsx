@@ -65,7 +65,7 @@ class RepoDetail extends Component {
                             <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', flex: 1}}
                                  key={item.name}>
                                 <a style={{flex: 1, textAlign: 'right', paddingRight: 20}}>{item.name}</a>
-                                <RepoCommits commits={item.commits} key={index} sliderWidth={550}/>
+                                <RepoCommits commits={item.commits} key={index} sliderWidth={550} s/>
                             </div>
                         );
                     })
